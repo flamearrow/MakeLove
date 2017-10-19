@@ -30,7 +30,6 @@ function [theta, ll] = newton(X,y)
 end
 
 
-
 function val = J(X, y, theta)
 % calculate the empirical loss of X, y given theta
     [m, n] = size(X);
