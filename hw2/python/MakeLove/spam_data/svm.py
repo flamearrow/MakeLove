@@ -73,14 +73,37 @@ def evaluate(output, label):
     error = (output != label).sum() * 1. / len(output)
     print 'Error: %1.4f' % error
 
-def main():
-    trainMatrix, tokenlist, trainCategory = readMatrix('MATRIX.TRAIN.400')
+
+def train_set(training_set_name):
+    print("training: " + str(training_set_name))
+    trainMatrix, tokenlist, trainCategory = readMatrix(training_set_name)
     testMatrix, tokenlist, testCategory = readMatrix('MATRIX.TEST')
 
     state = svm_train(trainMatrix, trainCategory)
     output = svm_test(testMatrix, state)
-
     evaluate(output, testCategory)
+
+    # output
+    # training: MATRIX.TRAIN.50
+    # Error: 0.0163
+    # training: MATRIX.TRAIN.100
+    # Error: 0.0075
+    # training: MATRIX.TRAIN.200
+    # Error: 0.0125
+    # training: MATRIX.TRAIN.400
+    # Error: 0.0025
+    # training: MATRIX.TRAIN.800
+    # Error: 0.0013
+    # training: MATRIX.TRAIN.1400
+    # Error: 0.0000
+
+def main():
+
+    training_datas = ['MATRIX.TRAIN.50', 'MATRIX.TRAIN.100', 'MATRIX.TRAIN.200', 'MATRIX.TRAIN.400',
+                      'MATRIX.TRAIN.800', 'MATRIX.TRAIN.1400']
+    for training_data in training_datas:
+        train_set(training_data)
+
     return
 
 if __name__ == '__main__':
