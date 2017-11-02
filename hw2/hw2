@@ -1,0 +1,22 @@
+1.(a)
+	Data set A converged in 30364 iterations
+	Data set B doesn't converge, this means the theta change never drops below a threshold.
+
+1.(b)
+	The reason the constant learning rate works for A is because? the theta calculated from A has a relateve LOW norm(~35) and the norm stays closer on each iteration, making it not overfitting the data, while in B the norm of theta is hight(increasing from 90) and keeps incrasing on each iteration. Makes it overfitting the data.
+
+1.(c)
+	add the gradient fomular here
+	i. Doesn't work, the more iteration the smaller learning rate is required, otherwise the new esitmated theta will flucturate around the optimal point, making the norm of theta nearly not able to decrease further.
+
+	ii. Works, the algorithm converges in 27850000 iterations.
+	
+	iii. Doesn't not work, this added an additional 2*theta to the gradient, \
+
+	iv. Doesn't not work because with constnat learning rate the norm decrease ratio is same with the original X, the norm delta will be flucating at a different point
+
+	v. Doesn't work because the new term won't contribute to the gradient, so it has no impact on the algorithm
+
+
+1.(d)
+	I don't know

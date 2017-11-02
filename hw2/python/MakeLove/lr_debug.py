@@ -20,12 +20,16 @@ def load_data(filename):
     return add_intercept(X), Y
 
 def calc_grad(X, Y, theta):
+    # print(str(theta))
     m, n = X.shape
     grad = np.zeros(theta.shape)
 
     margins = Y * X.dot(theta)
     probs = 1. / (1 + np.exp(margins))
     grad = -(1./m) * (X.T.dot(probs * Y))
+
+    # add norm of theta - shouldn't this reduce the norm?
+    grad = grad + 0.2 * theta
 
     return grad
 
@@ -34,15 +38,25 @@ def logistic_regression(X, Y):
     theta = np.zeros(n)
     learning_rate = 10
 
+    # scaling X 10 times
+    # X = X*10
     i = 0
     while True:
         i += 1
         prev_theta = theta
         grad = calc_grad(X, Y, theta)
         theta = theta  - learning_rate * (grad)
+        # theta = theta - learning_rate/np.square(i) * (grad)
+
+        norm = np.linalg.norm(prev_theta - theta)
         if i % 10000 == 0:
             print('Finished %d iterations' % i)
-        if np.linalg.norm(prev_theta - theta) < 1e-15:
+
+        if i % 1000 == 0:
+            print('norm of theta: ' + str(np.linalg.norm(theta)))
+            print('norm of delta: ' + str(norm))
+
+        if norm < 1e-15:
             print('Converged in %d iterations' % i)
             break
     return
